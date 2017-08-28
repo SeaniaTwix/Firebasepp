@@ -1,1 +1,2 @@
-Firebasepp
+# Firebasepp
+A Firebase Casablanca Wrapper
