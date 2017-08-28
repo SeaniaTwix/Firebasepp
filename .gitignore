@@ -1,0 +1,12 @@
+
+\.DS_Store
+
+\.vs/Firebasepp/v14/
+
+Debug/
+
+*.db
+
+Firebasepp\.VC\.VC\.opendb
+
+Firebasepp/ReadMe\.txt
