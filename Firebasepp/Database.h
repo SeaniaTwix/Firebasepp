@@ -20,12 +20,12 @@ namespace Firebasepp {
 		~Database();
 
 		// readData
-		FirebaseMap get(FirebaseUrl uri);
+		FirebaseMap get(FirebaseUrl uri, web::http::status_code *status);
 		// writeData
 
-		FirebaseMap set(FirebaseUrl uri, FirebaseMap pData);
+		FirebaseMap set(FirebaseUrl uri, FirebaseMap pData, web::http::status_code *status);
 
-		FirebaseMap update(FirebaseUrl uri, FirebaseMap pData);
+		FirebaseMap update(FirebaseUrl uri, FirebaseMap pData, web::http::status_code *status);
 		// removeData
 		pplx::task<web::http::http_response> remove(FirebaseUrl uri);
 

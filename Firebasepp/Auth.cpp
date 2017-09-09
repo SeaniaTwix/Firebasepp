@@ -44,10 +44,6 @@ namespace Firebasepp {
 		try {
 			req.wait();
 		}
-		catch (const boost::bad_any_cast& b) {
-			std::cout << b.what() << std::endl;
-			std::cout << "bad any cast." << std::endl;
-		}
 		catch (std::exception& e) {
 			std::cout << e.what() << std::endl;
 			return AuthResponse();

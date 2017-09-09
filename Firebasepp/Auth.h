@@ -10,7 +10,6 @@
 
 #include <functional>
 
-#include <boost/any.hpp>
 #include <cpprest/json.h>
 
 // Error Types

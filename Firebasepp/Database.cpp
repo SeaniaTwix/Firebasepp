@@ -15,7 +15,7 @@ namespace Firebasepp {
 
 	Database::~Database() { }
 
-	FirebaseMap Database::get(FirebaseUrl pUri) {
+	FirebaseMap Database::get(FirebaseUrl pUri, web::http::status_code *status) {
 		using namespace web;
 		using namespace web::http;
 
@@ -23,15 +23,18 @@ namespace Firebasepp {
 		uri_builder uri(encodedUri + U(DOT_JSON));
 		uri.append_query(U(ACCESS_TOKEN), m_token);
 
-		//std::cout << "Firebase get sending..." << std::endl;
-
 		auto request = m_mainClient.request(methods::GET, uri.to_string()).then([=](http_response res) {
-			FirebaseMap m;
+			FirebaseMap m = FirebaseMap();
 			FirebaseString dataRetreived(res.extract_string().get());
-			auto data = json::value::parse(dataRetreived).as_object();
+			
+			*status = res.status_code();
 
-			for (auto it = data.begin(); it != data.end(); it++) {
-				m[it->first] = it->second;
+			if (dataRetreived != U("null")) {
+				auto data = json::value::parse(dataRetreived).as_object();
+
+				for (auto it = data.begin(); it != data.end(); it++) {
+					m[it->first] = it->second;
+				}
 			}
 
 			return m;
@@ -47,7 +50,7 @@ namespace Firebasepp {
 		return request.get();
 	}
 
-	FirebaseMap Database::update(FirebaseUrl pUri, FirebaseMap pData) {
+	FirebaseMap Database::update(FirebaseUrl pUri, FirebaseMap pData, web::http::status_code *status) {
 		using namespace web;
 		using namespace web::http;
 
@@ -66,6 +69,8 @@ namespace Firebasepp {
 		auto request = m_mainClient.request(methods::PATCH, uri.to_string(), data).then([=](http_response res) {
 			FirebaseMap m;
 			FirebaseString dataRetreived(res.extract_string().get());
+
+			*status = res.status_code();
 
 			auto data = json::value::parse(dataRetreived).as_object();
 
@@ -96,16 +101,6 @@ namespace Firebasepp {
 		uri.append_query(U(ACCESS_TOKEN), m_token);
 
 		auto request = m_mainClient.request(methods::DEL, uri.to_string()).then([=](http_response res) {
-			/*
-			FirebaseMap m;
-			FirebaseString dataRetreived(res.extract_string().get());
-
-			auto data = json::value::parse(dataRetreived).as_object();
-
-			for (auto it = data.begin(); it != data.end(); it++) {
-				m[it->first] = it->second;
-			}
-			*/
 			return res;
 		});
 
@@ -119,7 +114,7 @@ namespace Firebasepp {
 		return request;
 	}
 
-	FirebaseMap Database::set(FirebaseUrl pUri, FirebaseMap pData) {
+	FirebaseMap Database::set(FirebaseUrl pUri, FirebaseMap pData, web::http::status_code *status) {
 		using namespace web;
 		using namespace web::http;
 
@@ -139,6 +134,8 @@ namespace Firebasepp {
 		auto request = m_mainClient.request(methods::PUT, uri.to_string(), data).then([=](http_response res) {
 			FirebaseMap m;
 			FirebaseString dataRetreived(res.extract_string().get());
+
+			*status = res.status_code();
 
 			auto data = json::value::parse(dataRetreived).as_object();
 

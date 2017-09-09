@@ -21,15 +21,15 @@ namespace Firebasepp {
 		db = new Database(m_config.databaseURL, m_res.idToken);
 	}
 
-	FirebaseMap firebase::get(FirebaseUrl pPath) {
-		return db->get(pPath);
+	FirebaseMap firebase::get(FirebaseUrl pPath, web::http::status_code *status) {
+		return db->get(pPath, status);
 	}
 
-	FirebaseMap firebase::update(FirebaseUrl pPath, FirebaseMap pObject) {
-		return db->update(pPath, pObject);
+	FirebaseMap firebase::update(FirebaseUrl pPath, FirebaseMap pObject, web::http::status_code *status) {
+		return db->update(pPath, pObject, status);
 	}
 
-	FirebaseMap firebase::set(FirebaseUrl pPath, FirebaseMap pObject) {
-		return db->set(pPath, pObject);
+	FirebaseMap firebase::set(FirebaseUrl pPath, FirebaseMap pObject, web::http::status_code *status) {
+		return db->set(pPath, pObject, status);
 	}
 }
