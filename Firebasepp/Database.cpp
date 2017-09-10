@@ -27,7 +27,9 @@ namespace Firebasepp {
 			FirebaseMap m = FirebaseMap();
 			FirebaseString dataRetreived(res.extract_string().get());
 			
-			*status = res.status_code();
+			if (status != nullptr) {
+				*status = res.status_code();
+			}
 
 			if (dataRetreived != U("null")) {
 				auto data = json::value::parse(dataRetreived).as_object();
@@ -70,7 +72,9 @@ namespace Firebasepp {
 			FirebaseMap m;
 			FirebaseString dataRetreived(res.extract_string().get());
 
-			*status = res.status_code();
+			if (status != nullptr) {
+				*status = res.status_code();
+			}
 
 			auto data = json::value::parse(dataRetreived).as_object();
 
@@ -135,7 +139,9 @@ namespace Firebasepp {
 			FirebaseMap m;
 			FirebaseString dataRetreived(res.extract_string().get());
 
-			*status = res.status_code();
+			if (status != nullptr) {
+				*status = res.status_code();
+			}
 
 			auto data = json::value::parse(dataRetreived).as_object();
 

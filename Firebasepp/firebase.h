@@ -31,9 +31,9 @@ namespace Firebasepp {
 
 		void initializeDatabase();
 
-		FirebaseMap get(FirebaseUrl pPath, web::http::status_code *status);
-		FirebaseMap set(FirebaseUrl pPath, FirebaseMap pObject, web::http::status_code *status);
-		FirebaseMap update(FirebaseUrl pPath, FirebaseMap pObject, web::http::status_code *status);
+		FirebaseMap get(FirebaseUrl pPath, web::http::status_code *status = nullptr);
+		FirebaseMap set(FirebaseUrl pPath, FirebaseMap pObject, web::http::status_code *status = nullptr);
+		FirebaseMap update(FirebaseUrl pPath, FirebaseMap pObject, web::http::status_code *status = nullptr);
 
 	protected:
 		FirebaseConfig m_config;
