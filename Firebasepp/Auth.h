@@ -8,8 +8,6 @@
 #include <cpprest/filestream.h>
 #include <cpprest/json.h>
 
-#include <functional>
-
 #include <cpprest/json.h>
 
 // Error Types
@@ -33,9 +31,11 @@ namespace Firebasepp {
 		std::string getSignedUserUid();
 
 		bool isSignedIn();
+		FirebaseMap refreshToken();
+		
+		void setTokenRefreshed(FirebaseMap &m);
 
 	protected:
-
 
 	private:
 		web::http::client::http_client m_mainClient;
@@ -47,12 +47,10 @@ namespace Firebasepp {
 
 		bool m_isSignedIn = false;
 
-		void refreshToken();
-
 		void loginSuccessed();
 		void loginFailed();
 
-		void response(std::map<std::string, web::json::value> &m);
+		void response(FirebaseMap &m);
 
 		std::string signInError();
 	};

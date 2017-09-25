@@ -14,6 +14,16 @@ namespace Firebasepp {
 
 	AuthResponse firebase::signIn(Authentication _auth) {
 		m_res = auth->loginWithEmailAndPassword(_auth);
+
+		return m_res;
+	}
+
+	AuthResponse firebase::updateAuthToken() {
+		auto refreshed = auth->refreshToken();
+
+		auth->setTokenRefreshed(refreshed);
+		db->setToken(refreshed[U("id_token")].as_string());
+
 		return m_res;
 	}
 
@@ -31,5 +41,13 @@ namespace Firebasepp {
 
 	FirebaseMap firebase::set(FirebaseUrl pPath, FirebaseMap pObject, web::http::status_code *status) {
 		return db->set(pPath, pObject, status);
+	}
+
+	void firebase::remove(FirebaseUrl pPath, web::http::status_code *status /*= nullptr*/) {
+		auto req = db->remove(pPath);
+
+		if (status != nullptr) {
+			*status = req.get().status_code();
+		}
 	}
 }

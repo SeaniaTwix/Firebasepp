@@ -29,6 +29,8 @@ namespace Firebasepp {
 		// removeData
 		pplx::task<web::http::http_response> remove(FirebaseUrl uri);
 
+		void setToken(FirebaseString tok) { m_token = tok; };
+
 	private:
 		web::http::client::http_client m_mainClient;
 

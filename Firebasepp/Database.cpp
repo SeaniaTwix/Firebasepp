@@ -133,8 +133,6 @@ namespace Firebasepp {
 			data[it->first] = it->second;
 		}
 
-		//std::cout << "Firebase set sending..." << std::endl;
-
 		auto request = m_mainClient.request(methods::PUT, uri.to_string(), data).then([=](http_response res) {
 			FirebaseMap m;
 			FirebaseString dataRetreived(res.extract_string().get());
